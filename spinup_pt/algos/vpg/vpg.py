@@ -1,6 +1,4 @@
-# used for debug
 import sys
-sys.path.append('/home/sora/project/learnRL')
 
 import numpy as np
 import gym
