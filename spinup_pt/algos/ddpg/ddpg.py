@@ -136,7 +136,11 @@ def ddpg(env_fn, actor_critic=core.Actor_Critic, ac_kwargs=dict(), seed=0,
     # make core of policy network
     net = actor_critic(obs_dim, **ac_kwargs)
     net_targ = actor_critic(obs_dim, **ac_kwargs)
+    net_targ.eval()
     print(net)
+
+    # Initializing targets to match main variables
+    net_targ.load_state_dict(net.state_dict())
 
     # loss function
     criterion_mse = nn.MSELoss()
