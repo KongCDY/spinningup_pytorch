@@ -45,16 +45,18 @@ class Actor_Critic(nn.Module):
         out_dim = action_space.shape[0]
         self.act_limit = action_space.high[0]
         self.actor = MLP(in_dim, hidden_sizes, out_dim, activation, output_activation)
-        self.critic = MLP(in_dim + out_dim, hidden_sizes, 1, activation)
+        self.critic1 = MLP(in_dim + out_dim, hidden_sizes, 1, activation)
+        self.critic2 = MLP(in_dim + out_dim, hidden_sizes, 1, activation)
 
     def forward(self, x):
         pi = self.act_limit * self.actor(x)
-        q_pi = self.apply_critic(x, pi)
-        return q_pi
+        q1_pi = self.critic1(torch.cat([x, pi], dim = 1))
+        return q1_pi
 
     def apply_critic(self, x, a):
-        q = self.critic(torch.cat([x, a], dim = 1))
-        return q
+        q1 = self.critic1(torch.cat([x, a], dim = 1))
+        q2 = self.critic2(torch.cat([x, a], dim = 1))
+        return q1, q2
 
     def get_action(self, x, noise_scale = 0):
         x = torch.from_numpy(x.astype(np.float32))
