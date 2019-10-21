@@ -32,7 +32,7 @@ Installation of system packages on Mac requires [Homebrew](https://brew.sh/). Wi
 brew install openmpi
 ```
 
-### Installing Spinning Up Pytorch
+## Installing Spinning Up Pytorch
 
 ```bash
 git clone https://github.com/KongCDY/spinningup_pytorch.git
@@ -40,7 +40,7 @@ cd spinningup_pytorch
 pip install -e .
 ```
 
-### Check Your Install
+## Check Your Install
 
 To see if you’ve successfully installed Spinning Up, try running PPO in the LunarLander-v2 environment with
 
