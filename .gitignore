@@ -2,3 +2,6 @@ output_dir
 data
 *.pyc
 *.swp
+__pycache__/
+*.pkl
+*.egg-info
