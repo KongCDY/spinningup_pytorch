@@ -29,8 +29,7 @@ class MLP(nn.Module):
     def __init__(self, in_dim, h_sizes, activation = nn.Tanh, output_activation = None):
         super(MLP, self).__init__()
         layers = []
-        layers.append(nn.Linear(in_dim, h_sizes[0]))
-        layers.append(activation())
+        h_sizes = [in_dim] + h_sizes
         for i in range(1, len(h_sizes) - 1):
             layers.append(nn.Linear(h_sizes[i - 1], h_sizes[i]))
             layers.append(activation())
